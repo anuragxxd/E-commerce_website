@@ -134,3 +134,18 @@ export const updateItemForSell = (id, formValues) => async (dispatch) => {
     payload: response.data,
   });
 };
+
+export const uploadImage = (id, formdata) => async (dispatch) => {
+  const response = await axios.post(`/api/items/${id}/image`, formdata);
+  dispatch({
+    type: "UPLOAD_IMAGE",
+  });
+};
+
+export const deleteImage = (itemId, imageId) => async (dispatch) => {
+  const response = await axios.delete(`/api/items/${itemId}/image/${imageId}`);
+  dispatch({
+    type: "DELETE_IMAGE",
+    payload: response.data,
+  });
+};

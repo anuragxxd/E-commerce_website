@@ -7,11 +7,21 @@ const ItemSchema = new mongoose.Schema(
       required: true,
       trim: true,
       type: String,
+      validate(value) {
+        if (value.length > 23) {
+          throw new Error("Name should be less than 22 words.");
+        }
+      },
     },
     description: {
       required: true,
       trim: true,
       type: String,
+      validate(value) {
+        if (value.length > 101) {
+          throw new Error("Description should be less than 100 words.");
+        }
+      },
     },
     quantity: {
       required: true,

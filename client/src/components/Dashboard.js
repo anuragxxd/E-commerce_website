@@ -1,18 +1,18 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { logoutUser } from "../action";
+import { logoutUser, getUser } from "../action";
 
 class Dashboard extends Component {
-  // componentDidMount() {
-  //   this.props.getUser();
-  // }
+  async componentDidMount() {
+    await this.props.getUser();
+  }
   renderData = () => {
     if (this.props.user) {
       return (
         <blockquote>
-          Name : {this.props.user.user.name}
+          Name : {this.props.user.name}
           <br></br>
-          Email : {this.props.user.user.email}
+          Email : {this.props.user.email}
         </blockquote>
       );
     }
@@ -41,4 +41,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, { logoutUser })(Dashboard);
+export default connect(mapStateToProps, { logoutUser, getUser })(Dashboard);

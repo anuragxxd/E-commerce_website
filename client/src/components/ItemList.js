@@ -13,6 +13,12 @@ class ItemList extends Component {
     value: "",
     items: null,
   };
+  toBase64 = (arr) => {
+    return btoa(
+      arr.reduce((data, byte) => data + String.fromCharCode(byte), "")
+    );
+  };
+
   renderList = () => {
     if (this.state.value && this.state.items) {
       return (
@@ -24,6 +30,7 @@ class ItemList extends Component {
                 desc={item.description}
                 price={item.price}
                 id={item._id}
+                image1={item.images[0].image}
               ></ItemCard>
             );
           })}
@@ -43,6 +50,7 @@ class ItemList extends Component {
                 desc={item.description}
                 price={item.price}
                 id={item._id}
+                image1={this.toBase64(item.images[0].image.data)}
               ></ItemCard>
             );
           })}

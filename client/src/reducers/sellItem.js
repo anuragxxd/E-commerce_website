@@ -1,7 +1,7 @@
 export default (state = [], action) => {
   switch (action.type) {
     case "SELL_ITEM":
-      return state;
+      return action.payload;
     case "SELL_ITEM_LIST":
       return action.payload;
     default:

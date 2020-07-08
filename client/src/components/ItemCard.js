@@ -16,7 +16,10 @@ class ItemCard extends Component {
               style={{ width: "140px", height: "auto" }}
             >
               <div className="card-image">
-                <img src="/logo192.png" className="materialboxed" />
+                <img
+                  src={`data:image/gif;base64,${this.props.image1}`}
+                  className="materialboxed"
+                />
               </div>
               <Link to={`/item/${this.props.id}`} style={{ color: "black" }}>
                 <div className="card-content">

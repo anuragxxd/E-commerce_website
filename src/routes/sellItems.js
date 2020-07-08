@@ -1,6 +1,7 @@
 const Item = require("../models/items");
 const express = require("express");
 const multer = require("multer");
+const sharp = require("sharp");
 const router = new express.Router();
 const auth = require("../middlewares/auth");
 ObjectId = require("mongodb").ObjectID;
@@ -105,7 +106,10 @@ router.post(
       _id: req.params.id,
       owner: req.user._id,
     });
-    const image = req.file.buffer;
+    const image = await sharp(req.file.buffer)
+      .resize({ width: 250, height: 250 })
+      .png()
+      .toBuffer();
     item.images = item.images.concat({ image });
     await item.save();
     res.send();
@@ -125,7 +129,7 @@ router.delete("/api/items/:id/image/:imageId", auth, async (req, res) => {
   });
   item.images = images;
   item.save();
-  res.send();
+  res.send(item);
 });
 
 module.exports = router;

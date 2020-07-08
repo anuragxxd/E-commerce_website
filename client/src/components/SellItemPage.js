@@ -18,26 +18,34 @@ class SellItemPage extends Component {
     history.push("/sell");
   };
   renderList = () => {
-    if (!this.props.items) {
+    if (!Array.isArray(this.props.items)) {
       return <Preloader></Preloader>;
-    }
-    return this.props.items.map((item) => {
+    } else if (!this.props.items.length != 0) {
       return (
-        <>
-          <SellItemPageCard
-            id={item._id}
-            name={item.name}
-            price={item.price}
-            description={item.description}
-            quantity={item.quantity}
-            category={item.category}
-            createdOn={item.createdAt}
-            remove={this.removeItem}
-            updatedOn={item.updatedAt}
-          ></SellItemPageCard>
-        </>
+        <div className="center">
+          <p>Nothing To Show</p>
+          <p class="grey-text">Refresh if their is problem</p>
+        </div>
       );
-    });
+    } else {
+      return this.props.items.map((item) => {
+        return (
+          <>
+            <SellItemPageCard
+              id={item._id}
+              name={item.name}
+              price={item.price}
+              description={item.description}
+              quantity={item.quantity}
+              category={item.category}
+              createdOn={item.createdAt}
+              remove={this.removeItem}
+              updatedOn={item.updatedAt}
+            ></SellItemPageCard>
+          </>
+        );
+      });
+    }
   };
   render() {
     return (
