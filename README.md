@@ -12,7 +12,7 @@ In the project directory, you can run:
 To download the server Dependencies.
 
 
-### 'cd client && npm i'
+### `cd client && npm i`
 
 To download the client Dependencies.
 
