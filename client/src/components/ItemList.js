@@ -74,13 +74,35 @@ class ItemList extends Component {
   };
   render() {
     return (
-      <div>
-        <SearchBar
-          value={this.state.value}
-          change={this.handleChange}
-          filter={this.filterItems}
-        ></SearchBar>
-        <div className="center">{this.renderList()}</div>
+      <div
+        style={{
+          height: "100%",
+          margin: "0",
+          minHeight: "100%",
+          position: "relative",
+        }}
+      >
+        <div style={{ paddingBottom: "20px" }}>
+          <SearchBar
+            value={this.state.value}
+            change={this.handleChange}
+            filter={this.filterItems}
+          ></SearchBar>
+          <div className="center">{this.renderList()}</div>
+        </div>
+        <div
+          className="center grey lighten-1 grey-text text-darken-1"
+          style={{
+            height: "20px",
+            position: "fixed",
+            bottom: 0,
+            left: 0,
+            width: "100%",
+            fontSize: "10px",
+          }}
+        >
+          &copy; 2020 Anurag Gupta
+        </div>
       </div>
     );
   }
