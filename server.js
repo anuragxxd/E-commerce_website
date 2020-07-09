@@ -13,6 +13,8 @@ app.use(sellItemRouter);
 app.use(buyItemRouter);
 app.use(cookieParser());
 
-app.listen(5000, () => {
-  console.log("port running");
+const port = process.env.PORT;
+
+app.listen(port, () => {
+  console.log(`Server running on port: ${port}`);
 });
