@@ -22,7 +22,7 @@ export default class PaypalButton extends React.Component {
       // => sometimes it may take about 0.5 second for everything to get set, or for the button to appear
     };
 
-    let env = "sandbox"; // you can set here to 'production' for production
+    let env = "production"; // you can set here to 'production' for production
     let currency = "INR"; // or you can set this value from your props or state
     let total = this.props.total; // same as above, this is the total amount (based on currency) to be paid by using Paypal express checkout
     // Document on Paypal's currency code: https://developer.paypal.com/docs/classic/api/currency_codes/
