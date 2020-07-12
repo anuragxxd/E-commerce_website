@@ -6,8 +6,13 @@ import history from "../history";
 import M from "materialize-css/dist/js/materialize.min.js";
 import "../css/footer.css";
 import Preloader from "./Preloader";
+import PaypalButton from "./PaypalButton";
 
 class CartList extends Component {
+  state = {
+    isCheckout: false,
+  };
+
   async componentDidMount() {
     await this.props.getCart();
     M.AutoInit();
@@ -58,20 +63,36 @@ class CartList extends Component {
       this.props.cart.forEach((item) => {
         total = total + item.price * item.quantity;
       });
-      if (total === 0) {
-        return <div>Rs. 0</div>;
-      }
-      return <div>Rs. {total}</div>;
+      return total;
     }
   };
   render() {
+    const total = this.renderTotal();
+    if (this.state.isCheckout) {
+      return (
+        <div className="container">
+          <PaypalButton total={total} items={this.props.cart} />
+        </div>
+      );
+    }
     return (
       <div>
         <ul class="collapsible popout">{this.renderList()}</ul>
         <div class="footer grey darken-4">
           <h5 class="container">
-            <div class="left">Grand Total</div>
-            <div class="right">{this.renderTotal()}</div>
+            <div class="left">Grand Total: Rs. {total}</div>
+            <div class="right">
+              <a
+                class="waves-effect waves-light btn-small black"
+                onClick={() => {
+                  if (total > 0) {
+                    this.setState({ isCheckout: true });
+                  }
+                }}
+              >
+                Buy Now
+              </a>
+            </div>
           </h5>
         </div>
       </div>
