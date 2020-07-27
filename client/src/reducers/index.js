@@ -4,6 +4,7 @@ import user from "./user";
 import item from "./item";
 import cart from "./cart";
 import sellItem from "./sellItem";
+import order from "./order";
 
 export default combineReducers({
   users: user,
@@ -11,4 +12,5 @@ export default combineReducers({
   items: item,
   cart: cart,
   sellItems: sellItem,
+  orders: order,
 });

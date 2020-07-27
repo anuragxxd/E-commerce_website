@@ -20,6 +20,7 @@ class CartList extends Component {
 
   async componentDidMount() {
     await this.props.getCart();
+    console.log(this.props.cart);
     M.AutoInit();
   }
   remove = async (id) => {
@@ -72,7 +73,7 @@ class CartList extends Component {
       return total;
     }
   };
-  onSuccess = () => {
+  onSuccess = (data) => {
     console.log("success");
   };
   onError = () => {
@@ -80,7 +81,7 @@ class CartList extends Component {
   };
   onCancel = (data) => {
     console.log("Cancel");
-    this.props.paymentSuccess(this.props.cart, data);
+    // this.props.paymentSuccess(this.props.cart, data);
   };
   render() {
     const total = this.renderTotal();

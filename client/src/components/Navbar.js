@@ -25,6 +25,11 @@ class Navbar extends Component {
       return (
         <div>
           <li>
+            <Link to="/orders">
+              <div>My Orders</div>
+            </Link>
+          </li>
+          <li>
             <Link to="/cart">
               <div>My cart</div>
             </Link>

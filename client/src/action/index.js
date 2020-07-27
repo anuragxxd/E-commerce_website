@@ -1,7 +1,5 @@
 import axios from "axios";
 import history from "../history";
-import { formValues } from "redux-form";
-import { response } from "express";
 // import setAuthToken from "../utils/setAuthToken"
 
 export const fetchUser = () => async (dispatch) => {

@@ -119,7 +119,23 @@ router.post("/api/payment/success", auth, async (req, res) => {
 router.get("/api/orders", auth, async (req, res) => {
   try {
     const user = await User.findById(req.user._id);
-    res.send(user.orders);
+    let items = [];
+    for (let product of user.orders) {
+      // console.log(product.product[0]);
+      let item = await Item.findById(product.product[0].id);
+      if (item) {
+        items.push({
+          id: item.id,
+          name: item.name,
+          description: item.description,
+          price: item.price,
+          quantity: product.product[0].quantity,
+          time: product.product[0].time,
+        });
+      }
+      // console.log(items);
+    }
+    res.send(items);
   } catch (e) {
     res.status(500).send(e);
   }

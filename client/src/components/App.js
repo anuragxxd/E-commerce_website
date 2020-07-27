@@ -11,6 +11,7 @@ import CartList from "./CartList";
 import SellItem from "./SellItem";
 import SellItemPage from "./SellItemPage";
 import SellEdit from "./SellEdit";
+import OrderList from "./OrderList";
 
 class App extends Component {
   render() {
@@ -29,6 +30,7 @@ class App extends Component {
               <Route exact path="/sell" component={SellItemPage}></Route>
               <Route exact path="/sell/create" component={SellItem}></Route>
               <Route exact path="/sell/edit/:id" component={SellEdit}></Route>
+              <Route exact path="/orders" component={OrderList}></Route>
             </Switch>
           </div>
         </Router>
