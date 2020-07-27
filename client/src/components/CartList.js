@@ -60,6 +60,7 @@ class CartList extends Component {
       return <Preloader></Preloader>;
     } else {
       var total = 0;
+      console.log(this.props.cart);
       this.props.cart.forEach((item) => {
         total = total + item.price * item.quantity;
       });
