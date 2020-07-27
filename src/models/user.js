@@ -54,6 +54,31 @@ const UserSchema = new mongoose.Schema(
         ],
       },
     ],
+    orders: [
+      {
+        product: [
+          {
+            id: {
+              type: String,
+              required: true,
+            },
+            quantity: {
+              type: Number,
+              default: 1,
+              validate(value) {
+                if (value < 1) {
+                  throw new Error("Inavlid input");
+                }
+              },
+            },
+            time: {
+              type: Date,
+              default: Date.now(),
+            },
+          },
+        ],
+      },
+    ],
     tokens: [
       {
         token: {

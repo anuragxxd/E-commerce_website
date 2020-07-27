@@ -3,6 +3,7 @@ const express = require("express");
 const router = new express.Router();
 const auth = require("../middlewares/auth");
 const User = require("../models/user");
+const Payment = require("../models/payment");
 
 router.post("/api/cart/:id", auth, async (req, res) => {
   try {
@@ -86,6 +87,39 @@ router.get("/api/item/:id", async (req, res) => {
       res.status(404).send("Item not found");
     }
     res.send(item);
+  } catch (e) {
+    res.status(500).send(e);
+  }
+});
+
+router.post("/api/payment/success", auth, async (req, res) => {
+  try {
+    const payment = new Payment({
+      customerId: req.user._id,
+      items: req.body.items,
+      data: req.body.data,
+    });
+    await payment.save();
+
+    const user = await User.findById(req.user._id);
+    for (let item of req.body.items) {
+      const id = item.id;
+      const product = { id, quantity: item.quantity };
+      user.orders.push({ product });
+    }
+
+    user.cartProducts = [];
+    await user.save();
+    res.send();
+  } catch (e) {
+    res.status(500).send(e);
+  }
+});
+
+router.get("/api/orders", auth, async (req, res) => {
+  try {
+    const user = await User.findById(req.user._id);
+    res.send(user.orders);
   } catch (e) {
     res.status(500).send(e);
   }

@@ -1,6 +1,11 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { getCart, removeItemFromCart, updateItem } from "../action";
+import {
+  getCart,
+  removeItemFromCart,
+  updateItem,
+  paymentSuccess,
+} from "../action";
 import CartCard from "./CartCard";
 import history from "../history";
 import M from "materialize-css/dist/js/materialize.min.js";
@@ -67,12 +72,28 @@ class CartList extends Component {
       return total;
     }
   };
+  onSuccess = () => {
+    console.log("success");
+  };
+  onError = () => {
+    console.log("Error");
+  };
+  onCancel = (data) => {
+    console.log("Cancel");
+    this.props.paymentSuccess(this.props.cart, data);
+  };
   render() {
     const total = this.renderTotal();
     if (this.state.isCheckout) {
       return (
         <div className="container">
-          <PaypalButton total={total} items={this.props.cart} />
+          <PaypalButton
+            total={total}
+            items={this.props.cart}
+            onSuccess={this.onSuccess}
+            onCancel={this.onCancel}
+            onError={this.onError}
+          />
         </div>
       );
     }
@@ -111,4 +132,5 @@ export default connect(mapStateToProps, {
   getCart,
   removeItemFromCart,
   updateItem,
+  paymentSuccess,
 })(CartList);

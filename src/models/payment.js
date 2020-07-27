@@ -7,12 +7,12 @@ const PaymentSchema = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       required: true,
     },
-    products: {
+    items: {
       type: Array,
       required: true,
     },
     data: {
-      type: Array,
+      type: Object,
     },
   },
   {

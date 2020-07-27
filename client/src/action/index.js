@@ -1,6 +1,7 @@
 import axios from "axios";
 import history from "../history";
 import { formValues } from "redux-form";
+import { response } from "express";
 // import setAuthToken from "../utils/setAuthToken"
 
 export const fetchUser = () => async (dispatch) => {
@@ -146,6 +147,18 @@ export const deleteImage = (itemId, imageId) => async (dispatch) => {
   const response = await axios.delete(`/api/items/${itemId}/image/${imageId}`);
   dispatch({
     type: "DELETE_IMAGE",
+    payload: response.data,
+  });
+};
+
+export const paymentSuccess = (items, data) => async (dispatch) => {
+  await axios.post("/api/payment/success", { items, data });
+};
+
+export const orders = (items, data) => async (dispatch) => {
+  const response = await axios.get("/api/orders");
+  dispatch({
+    type: "ORDER_ITEMS",
     payload: response.data,
   });
 };

@@ -65,12 +65,6 @@ const ItemSchema = new mongoose.Schema(
   }
 );
 
-// ItemSchema.virtual("users", {
-//   ref: "User",
-//   localField: "_id",
-//   foreignField: "cartproducts",
-// });
-
 const Item = mongoose.model("Item", ItemSchema);
 
 module.exports = Item;
