@@ -27,7 +27,7 @@ You will also see any lint errors in the console.
 
 ## Production Site
 
-### https://e-commerce-anurag.herokuapp.com/cart
+### https://e-commerce-anurag.herokuapp.com
 
 
 For more queries contact me.
